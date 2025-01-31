@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools >= 75.8.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "activefence"
+version = "0.0.1"
+authors = [
+    { name = "Oleg Tikhonov", email = "olegtikhonov@gmail.com" },
+]
+description = "Rate Limiter"
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]

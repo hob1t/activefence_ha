@@ -1,0 +1,19 @@
+free:
+  plan:
+    window: 5
+    requests: 1
+    daily:
+      limit: 50
+pro:
+  plan:
+    window: 5 #sec
+    requests: 10
+    daily:
+      limit: 12000
+
+enterprise:
+  plan:
+    window: 5
+    requests: 100
+    daily:
+      limit: unlimited
