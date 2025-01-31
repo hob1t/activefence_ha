@@ -93,8 +93,25 @@ pytest tests/*.py --no-header -s
 
 #### Send requests using curl
 
+First start flask app locally
+
 ```
-curl --header "X-App-Id: PRO_123" www.google.com
+cd src
+ flask --app Jokefier run
+```
+
+Then send curl commands
+
+```
+ curl --header "X-App-Id: ENTERPRISE_user"  'http://127.0.0.1:5000/jokes/chuck_norris'
+```
+
+```
+curl --header "X-App-Id: FREE_user"  'http://127.0.0.1:5000/jokes/chuck_norris'
+```
+
+```
+curl --header "X-App-Id: PRO_user"  'http://127.0.0.1:5000/jokes/chuck_norris' 
 ```
 
 
@@ -105,16 +122,10 @@ References:
 [Redis commands](https://redis.io/docs/latest/commands/)
 
 [](https://blog.finxter.com/5-best-ways-to-implement-rate-limiting-for-users-in-python/)
+
 [](https://collabnix.com/rate-limiting-in-redis-explained/)
+
 [rate limiting best practices](https://developer.okta.com/docs/reference/rl-best-practices/)
+
 [unix timestamp calculator](https://www.unixtimestamp.com/)
-
-#### TODO:
-
-Add config file
-Finish all two algos adding global amount of requests
-Change checking if key exists insteand of get is not None
-Add algo diagrams
-Add architecture diagram
-Add renew each 24 hours
 

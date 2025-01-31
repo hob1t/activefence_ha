@@ -1,11 +1,17 @@
 import logging
 import redis
 from flask import Flask, request
-from Utils import clear_ns
-from TokenBucket import TokenBucket
-from FixedWindow import FixedWindow
-from Response import Response
-from SlidingWindow import SlidingWindow
+from src.Utils import clear_ns
+from src.TokenBucket import TokenBucket
+from src.FixedWindow import FixedWindow
+from src.Response import Response
+from src.SlidingWindow import SlidingWindow
+from src.Config import get_free_plan_requests
+from src.Config import get_free_plan_window
+from src.Config import get_pro_plan_requests
+from src.Config import get_pro_plan_window
+from src.Config import get_enterprise_plan_requests
+from src.Config import get_enterprise_plan_window
 
 # the Flask application object creation has to be in the __init__.py file. That way each module can import it safely
 # and the __name__ variable will resolve to the correct package.
@@ -24,10 +30,12 @@ app.logger.addHandler(handler)
 redis_client = redis.Redis(host='localhost', port=6379, db=0)
 clear_ns(redis_client)
 
+
+
 #### Plans
-fixed_window = FixedWindow("FREE:user", 50, 86400)
-token_buket = TokenBucket("PRO:user", max_requests=12000, tokens_per_second=10, expire=86400)
-sliding_window = SlidingWindow("ENTERPRISE:user", 5, 300)
+fixed_window = FixedWindow("FREE:user", get_free_plan_requests(), get_free_plan_window())
+token_buket = TokenBucket("ENTERPRISE:user", get_enterprise_plan_requests(), get_enterprise_plan_window())
+sliding_window = SlidingWindow("PRO:user", get_pro_plan_requests(), get_pro_plan_window())
 
 
 @app.route('/jokes/chuck_norris')

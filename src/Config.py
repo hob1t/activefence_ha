@@ -1,6 +1,6 @@
 import yaml
 
-with open('src/config.yml', 'r') as file:
+with open('config.yml', 'r') as file:
     config_service = yaml.safe_load(file)
 
 
