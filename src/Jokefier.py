@@ -1,6 +1,6 @@
 import logging
 import redis
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from src.Utils import clear_ns
 from src.TokenBucket import TokenBucket
 from src.FixedWindow import FixedWindow
@@ -45,16 +45,20 @@ def execute():
     if "PRO" in app_id:
         app.logger.info("PRO type")
         # key: str, max_requests: int, tokens_per_second: int, expire: int
-        return str(token_buket.rate_limit())
+        return pass_or_abort(token_buket.rate_limit(), app_id)
 
     elif "ENTERPRISE" in app_id:
         app.logger.info("Enterprise type")
-        return str(sliding_window.rate_limit())
+        return pass_or_abort(sliding_window.rate_limit(), app_id)
     else:
         app.logger.info("Free type")
-        return str(fixed_window.rate_limit())
+        return pass_or_abort(fixed_window.rate_limit(), app_id)
 
-    return f"X-App-Id: {app_id}"
+
+def pass_or_abort(response: Response, app_id: str):
+    if response.allowed :
+        return jsonify(response)
+    return jsonify(error=str(f"Too many requests for {app_id}")), 429
 
 
 if __name__ == '__main__':

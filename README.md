@@ -97,13 +97,13 @@ First start flask app locally
 
 ```
 cd src
- flask --app Jokefier run
+flask --app Jokefier run
 ```
 
 Then send curl commands
 
 ```
- curl --header "X-App-Id: ENTERPRISE_user"  'http://127.0.0.1:5000/jokes/chuck_norris'
+curl --header "X-App-Id: ENTERPRISE_user"  'http://127.0.0.1:5000/jokes/chuck_norris'
 ```
 
 ```
