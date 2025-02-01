@@ -1,6 +1,11 @@
+import os
+
 import yaml
 
-with open('config.yml', 'r') as file:
+
+print(f" current path {os.getcwd()}")
+
+with open(f"{os.getcwd()}/src/config.yml", 'r') as file:
     config_service = yaml.safe_load(file)
 
 

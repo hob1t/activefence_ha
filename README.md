@@ -96,8 +96,7 @@ pytest tests/*.py --no-header -s
 First start flask app locally
 
 ```
-cd src
-flask --app Jokefier run
+flask --app src/Jokefier run
 ```
 
 Then send curl commands
